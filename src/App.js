@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 import './App.css';
+
 import Navbar from './Components/Navbar';
-import Scorecard from './Components/Scorecard';
+// import Scorecard from './Components/Scorecard';
+import DisplayScoresJumbotron from './Components/DisplayScoresJumbotron';
+
+
 
 class App extends Component {
   render() {
     return (
       <div className="App">
       <Navbar></Navbar>
-        {/* <header className="App-header">
-        </header> */}
         <div className="Display-Board">
-          <Scorecard></Scorecard>
+          <DisplayScoresJumbotron></DisplayScoresJumbotron>
         </div>
       </div>
     );
