@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 
 import Navbar from './Components/Navbar';
+
 // import Scorecard from './Components/Scorecard';
 import DisplayScoresJumbotron from './Components/DisplayScoresJumbotron';
 

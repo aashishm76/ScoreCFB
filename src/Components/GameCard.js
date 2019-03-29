@@ -1,17 +1,17 @@
 import React, {Component} from 'react';
 import Card from '@material-ui/core/Card';
 import { CardContent } from '@material-ui/core';
+import {withStyles} from '@material-ui/core/styles'
 
 
+
+// This is the actual scorecard class
+// Props passed in from DisplayScoresJumbotron which is the parent component
 class GameCard extends Component {
 
     render() {
-    
-        // Console log out the props to see data is working
-        console.log("Component receives props", this.props);
-
         return (
-            <Card className="testcard">
+            <Card className="scorecard">
                 <CardContent>
                     <div className="scorecard-topbar">
                     </div>
@@ -34,7 +34,7 @@ class GameCard extends Component {
                                     <td>{this.props.gameObject.Q2A}</td>
                                     <td>{this.props.gameObject.Q3A}</td>
                                     <td>{this.props.gameObject.Q4A}</td>
-                                    <td className="total-scoreA">0</td>
+                                    <td className="total-scoreA">{Number(this.props.gameObject.Q1A) + Number(this.props.gameObject.Q2A) + Number(this.props.gameObject.Q3A) + Number(this.props.gameObject.Q4A)}</td>
                                 </tr>
                                 <tr>
                                     <td className="team-nameB">{this.props.gameObject.Team_NameB}</td>
@@ -42,7 +42,7 @@ class GameCard extends Component {
                                     <td>{this.props.gameObject.Q2B}</td>
                                     <td>{this.props.gameObject.Q3B}</td>
                                     <td>{this.props.gameObject.Q4B}</td>
-                                    <td className="total-scoreB">0</td>
+                                    <td className="total-scoreB">{Number(this.props.gameObject.Q1B) + Number(this.props.gameObject.Q2B) + Number(this.props.gameObject.Q3B) + Number(this.props.gameObject.Q4B)}</td>
                                 </tr>
                             </tbody>
                         </table>

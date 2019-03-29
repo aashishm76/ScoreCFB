@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
 import GameCard from '../Components/GameCard';
+import Grid from '@material-ui/core/Grid';
 
+
+// Parent component that holds all the scorecard components as children
 class DisplayScoresJumbotron extends Component {
 
     constructor() {
@@ -39,13 +41,20 @@ class DisplayScoresJumbotron extends Component {
     }
 
     render() {
-
         return (
-            // Return the Scorecards
-            <div className="scoresContainer">
+            // // Return the Scorecards
+            // <div className="scoresContainer">
+            //     {this.state.ScorecardsArray.map((game) => 
+            //     <GameCard gameObject={game}></GameCard>)}
+            // </div>
+
+            <Grid container spacing={35}>
                 {this.state.ScorecardsArray.map((game) => 
-                <GameCard gameObject={game}></GameCard>)}
-            </div>
+                    <Grid item key={game._id} sm={6} md={4} lg={3}>
+                        <GameCard gameObject={game}></GameCard>
+                    </Grid>
+                )}
+            </Grid>
         )
     }
 

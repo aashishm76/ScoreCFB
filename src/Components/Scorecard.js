@@ -3,7 +3,8 @@ import Card from '@material-ui/core/Card';
 import { CardContent, CardActions, Button } from '@material-ui/core';
 import axios from 'axios';
 
-
+// THIS CLASS IS DEPRECATED
+// ONLY FOR DEV TESTING
 class Scorecard extends Component {
 
     constructor() {
