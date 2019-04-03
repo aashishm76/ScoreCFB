@@ -1,17 +1,22 @@
 import React, {Component} from 'react';
 import Card from '@material-ui/core/Card';
 import { CardContent } from '@material-ui/core';
-import {withStyles} from '@material-ui/core/styles'
+import { withStyles } from '@material-ui/core/styles';
 
-
-
+const styles = {
+    scorecard: {
+        fontSize: 21,
+        margin: '15px',
+        align: 'center'
+    }
+}
 // This is the actual scorecard class
 // Props passed in from DisplayScoresJumbotron which is the parent component
 class GameCard extends Component {
 
     render() {
         return (
-            <Card className="scorecard">
+            <Card className={this.props.classes.scorecard}>
                 <CardContent>
                     <div className="scorecard-topbar">
                     </div>
@@ -53,4 +58,4 @@ class GameCard extends Component {
     }
 }
 
-export default (GameCard);
+export default withStyles(styles)(GameCard);
