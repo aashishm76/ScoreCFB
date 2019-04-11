@@ -2,12 +2,25 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import GameCard from '../Components/GameCard';
 import Grid from '@material-ui/core/Grid';
+import { withStyles } from '@material-ui/core/styles';
 
+import WeekDropdown from '../Components/WeekDropdown';
+
+// CSS in JS Styling
+const styles = {
+    DisplayScoresJumbotron: {
+        margin: '5px',
+    },
+    GridList: {
+        padding: '15px'
+    },
+}
 
 // Parent component that holds all the scorecard components as children
 class DisplayScoresJumbotron extends Component {
 
-    constructor() {
+    constructor() 
+    {
         super();
 
         // Assign the default state
@@ -21,7 +34,8 @@ class DisplayScoresJumbotron extends Component {
     }
 
     // Run the fetch her to gather all the scorecards data
-    getScorecards() {
+    getScorecards() 
+    {
         var postBody = { Week: 1}
         var apiURL = "http://68.183.28.230:3000/scores/getScoreboardsByWeek"
         axios.post(apiURL, postBody).then(res => {
@@ -36,28 +50,28 @@ class DisplayScoresJumbotron extends Component {
         })
     }
 
-    componentWillMount() {
+    componentWillMount() 
+    {
         this.getScorecards();
     }
 
-    render() {
+    render() 
+    {
         return (
-            // // Return the Scorecards
-            // <div className="scoresContainer">
-            //     {this.state.ScorecardsArray.map((game) => 
-            //     <GameCard gameObject={game}></GameCard>)}
-            // </div>
 
-            <Grid container spacing={35}>
-                {this.state.ScorecardsArray.map((game) => 
-                    <Grid item key={game._id} sm={6} md={4} lg={3}>
-                        <GameCard gameObject={game}></GameCard>
-                    </Grid>
-                )}
-            </Grid>
+            // Week Dropdown menu picker
+            <div className="DisplayScoresJumbotron">
+                <Grid container spacing={16} className={this.props.classes.GridList}>
+                    {this.state.ScorecardsArray.map((game) => 
+                        <Grid item key={game._id} className={this.props.classes.GridItemGame} md={4} lg={3}>
+                            <GameCard className="game" gameObject={game}></GameCard>
+                        </Grid>
+                    )}
+                </Grid>
+            </div>
         )
     }
 
 }
 
-export default (DisplayScoresJumbotron);
+export default withStyles(styles)(DisplayScoresJumbotron);

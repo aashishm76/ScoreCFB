@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -27,12 +27,15 @@
   font-size: calc(10px + 2vmin);
   color: black;
 }
+*/
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.App {
+  /* text-align: center; */
 }
+
+.Display-Board {
+  background-color: #282c34;
+  font-size: 15px;
+}
+
+

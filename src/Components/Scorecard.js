@@ -1,79 +1,70 @@
 import React, {Component} from 'react';
 import Card from '@material-ui/core/Card';
-import { CardContent, CardActions, Button } from '@material-ui/core';
+import { CardContent } from '@material-ui/core';
+import Table  from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+
 import axios from 'axios';
 
 // THIS CLASS IS DEPRECATED
 // ONLY FOR DEV TESTING
 class Scorecard extends Component {
 
-    constructor() {
-        super();
+    // constructor() {
+    //     super();
 
-        // Assign default state 
-        this.state = {
-            total: '',
-            scoreboards: [{}],
-        };
-    }
+    //     // Assign default state 
+    //     this.state = {
+    //         total: '',
+    //         scoreboards: [{}],
+    //     };
+    // }
 
-    componentWillMount() {
+    // componentWillMount() {
 
-        // Axios call 
-        var postBody = { Week: 1 };
-        axios.post("http://68.183.28.230:3000/scores/getScoreboardsByWeek", postBody).then(res => {
-            this.setState({
-                total: res.data.total,
-                scoreboards: res.data.scores,
-            })
-            // console.log(res.data);
-            console.log("Right after fetching data", this.state);
-        });
-    }
+    //     // Axios call 
+    //     var postBody = { Week: 1 };
+    //     axios.post("http://68.183.28.230:3000/scores/getScoreboardsByWeek", postBody).then(res => {
+    //         this.setState({
+    //             total: res.data.total,
+    //             scoreboards: res.data.scores,
+    //         })
+    //         // console.log(res.data);
+    //         console.log("Right after fetching data", this.state);
+    //     });
+    // }
 
     render() {
         
         return (
             <Card className="testcard">
                 <CardContent>
-                    <div className="scorecard-topbar">
-                    </div>
-                    <div className="scorecard-table">
-                        <table>
-                            <thead> 
-                                <tr>
-                                    <th>&nbsp;</th>
-                                    <td>Q1</td>
-                                    <td>Q2</td>
-                                    <td>Q3</td>
-                                    <td>Q4</td>
-                                    <td>Final</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td className="team-nameA">{this.state.scoreboards[0].Team_NameA}</td>
-                                    <td>{this.state.scoreboards[0].Q1A}</td>
-                                    <td>{this.state.scoreboards[0].Q2A}</td>
-                                    <td>{this.state.scoreboards[0].Q3A}</td>
-                                    <td>{this.state.scoreboards[0].Q4A}</td>
-                                    <td className="total-scoreA"></td>
-                                </tr>
-                                <tr>
-                                    <td className="team-nameB">USF</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td className="total-scoreB">0</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>&nbsp;</TableCell>
+                                <TableCell> Q1 </TableCell>
+                                <TableCell> Q2 </TableCell>
+                                <TableCell> Q3 </TableCell>
+                                <TableCell> Q4 </TableCell>
+                                <TableCell> Final </TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            <TableRow>
+                                <TableCell> UCF </TableCell>
+                                <TableCell> 55 </TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell> USF </TableCell>
+                                <TableCell> 0 </TableCell>
+                            </TableRow>
+                        </TableBody>
+                    </Table>
                 </CardContent>
-                <CardActions>
-                    <Button size="small">Test Button</Button>
-                </CardActions>
             </Card>
         );
     }
