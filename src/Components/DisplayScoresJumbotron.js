@@ -60,6 +60,9 @@ class DisplayScoresJumbotron extends Component {
 
             // Week value that is used to determine what week to fetch data from
             Week: '1',
+
+            // Array of MenuItems used in the Dropdown select box
+            DropDownArray: ['1', '2', '3', '4', '5'],
         }
     }
 
@@ -106,24 +109,10 @@ class DisplayScoresJumbotron extends Component {
                     <div>
                         <form className={this.props.classes.DropdownRoot}>
                             <FormControl variant="filled" className={this.props.classes.DropdownSelector}>
-                                <InputLabel>{this.state.Week}</InputLabel>
-                                <Select value={this.state.Week} onChange={this.handleChange} name="Week">
-                                    <MenuItem value='2'> Week 1 </MenuItem>
-                                    <MenuItem value='3'> Week 2 </MenuItem>
-                                    <MenuItem value='4'> Week 3 </MenuItem>
-                                    <MenuItem value='5'> Week 4 </MenuItem>
-                                    <MenuItem value='6'> Week 5 </MenuItem> 
-                                    <MenuItem value='7'> Week 6 </MenuItem>
-                                    <MenuItem value='8'> Week 7 </MenuItem>
-                                    <MenuItem value='9'> Week 8 </MenuItem>
-                                    <MenuItem value='10'> Week 9 </MenuItem>
-                                    <MenuItem value='11'> Week 10 </MenuItem>
-                                    <MenuItem value='12'> Week 11 </MenuItem>
-                                    <MenuItem value='13'> Week 12 </MenuItem>
-                                    <MenuItem value='14'> Week 13 </MenuItem>
-                                    <MenuItem value='15'> Week 14 </MenuItem>
-                                    <MenuItem value='16'> Week 15 </MenuItem>
-                                    <MenuItem value='Bowl'>Bowl Games </MenuItem>
+                                <Select value={this.state.Week} onChange={this.handleChange}>
+                                    {this.state.DropDownArray.map((week, index) =>
+                                        <MenuItem key={index} value={week}>Week {week}</MenuItem> 
+                                    )}
                                 </Select>
                             </FormControl>
                         </form>
