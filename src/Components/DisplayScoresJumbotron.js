@@ -31,7 +31,7 @@ const styles = {
     },
     DropdownSelector: {
         width: '125px',
-        heigh: '100px',
+        heigh: '180px',
         backgroundColor: 'white',
         borderRadius: '2px',
         textAlign: 'center',
@@ -62,7 +62,7 @@ class DisplayScoresJumbotron extends Component {
             Week: '1',
 
             // Array of MenuItems used in the Dropdown select box
-            DropDownArray: ['1', '2', '3', '4', '5'],
+            DropDownArray: ['1', '2', '3', '4', '5', '6', '8', '9', '10', '11', '12', '13'],
         }
     }
 
@@ -106,17 +106,17 @@ class DisplayScoresJumbotron extends Component {
             <div className="DisplayScoresJumbotron">
                 <Typography className={this.props.classes.WeekName} variant="h2" gutterBottom>College Football Week {this.state.Week} Scores</Typography>
                 <div className={this.props.classes.WeekSelectContainer}>
-                    <div>
                         <form className={this.props.classes.DropdownRoot}>
                             <FormControl variant="filled" className={this.props.classes.DropdownSelector}>
                                 <Select value={this.state.Week} onChange={this.handleChange}>
                                     {this.state.DropDownArray.map((week, index) =>
                                         <MenuItem key={index} value={week}>Week {week}</MenuItem> 
                                     )}
+                                    <MenuItem>Bowls</MenuItem>
+                                    <MenuItem>Championship</MenuItem>
                                 </Select>
                             </FormControl>
                         </form>
-                    </div>
                 </div>
                 <div className={this.props.classes.GridListContainer}>
                     <Grid container spacing={16} className={this.props.classes.GridList}>
