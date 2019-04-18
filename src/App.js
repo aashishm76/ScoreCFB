@@ -2,19 +2,21 @@ import React, { Component } from 'react';
 import './App.css';
 
 // Component Imports
-import Navbar from './Components/Navbar';
-import Scorecard from './Components/Scorecard';
 import DisplayScoresJumbotron from './Components/DisplayScoresJumbotron';
+import AppNavigationBar from './Components/AppNavigationBar';
+
+// DEV Components (these are experimental and will be removed later)
+import Navbar from './Components/Navbar';
 
 
-
+// Main App Parent component that will eventually load up children components
 class App extends Component {
 
   render() {
     return (
       <div className="App">
         <div className="NavigationPane">
-          <Navbar></Navbar>
+          <AppNavigationBar></AppNavigationBar>
         </div>
         <div className="DisplayBoard">
           <DisplayScoresJumbotron></DisplayScoresJumbotron>
