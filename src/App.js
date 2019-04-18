@@ -6,7 +6,7 @@ import DisplayScoresJumbotron from './Components/DisplayScoresJumbotron';
 import AppNavigationBar from './Components/AppNavigationBar';
 
 // DEV Components (these are experimental and will be removed later)
-import Navbar from './Components/Navbar';
+
 
 
 // Main App Parent component that will eventually load up children components
