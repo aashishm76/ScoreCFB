@@ -8,16 +8,18 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import { withStyles } from '@material-ui/core/styles';
-import { InputLabel, Typography } from '@material-ui/core';
+import { InputLabel, Typography, Divider } from '@material-ui/core';
 
 // CSS in JS Styling
 const styles = {
     DisplayScoresJumbotron: {
-        margin: '5px',
+
     },
     WeekSelectContainer: {
-        paddingTop: '25px',
-        marginBottom: '15px',
+        display: 'inline-block',
+        float: 'right',
+        marginTop: '50px',
+        marginRight: '15px',
     },
     GridListContainer: {
         marginTop: '45px',
@@ -40,7 +42,11 @@ const styles = {
     WeekName: {
         color: 'white',
         paddingTop: '25px',
-    }
+        marginLeft: '15px',
+    },
+    WeekNameDiv: {
+        display: 'inline-block',
+    },
 }
 
 // Parent component that holds all the scorecard components as children
@@ -66,7 +72,7 @@ class DisplayScoresJumbotron extends Component {
         }
     }
 
-    // Run the fetch her to gather all the scorecards data
+    // Run the fetch to gather all the scorecards data
     getScorecards() 
     {
         var postBody= {Week: this.state.Week}
@@ -103,8 +109,9 @@ class DisplayScoresJumbotron extends Component {
     {
         return (
 
-            <div className="DisplayScoresJumbotron">
-                <Typography className={this.props.classes.WeekName} variant="h2" gutterBottom>College Football Week {this.state.Week} Scores</Typography>
+            <div className={this.props.classes.DisplayScoresJumbotron}>
+                <div className={this.props.classes.WeekNameDiv}>
+                    <Typography className={this.props.classes.WeekName} variant="h2" gutterBottom>College Football Week {this.state.Week} Scores</Typography>                </div>
                 <div className={this.props.classes.WeekSelectContainer}>
                         <form className={this.props.classes.DropdownRoot}>
                             <FormControl variant="filled" className={this.props.classes.DropdownSelector}>
