@@ -6,8 +6,7 @@ import DisplayScoresJumbotron from './Components/DisplayScoresJumbotron';
 import AppNavigationBar from './Components/AppNavigationBar';
 
 // DEV Components (these are experimental and will be removed later)
-
-
+import Rankings from './Components/Rankings';
 
 // Main App Parent component that will eventually load up children components
 class App extends Component {
@@ -18,8 +17,11 @@ class App extends Component {
         <div className="NavigationPane">
           <AppNavigationBar></AppNavigationBar>
         </div>
-        <div className="DisplayBoard">
+        {/* <div className="DisplayBoard">
           <DisplayScoresJumbotron></DisplayScoresJumbotron>
+        </div> */}
+        <div>
+          <Rankings></Rankings>
         </div>
       </div>
     );

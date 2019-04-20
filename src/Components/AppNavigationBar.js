@@ -15,6 +15,8 @@ import SearchIcon from '@material-ui/icons/Search';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import { ListItemText, Divider, Collapse } from '@material-ui/core';
+import { ExpandLess, ExpandMore } from '@material-ui/icons';
 
 // Styling (Pulled from Material UI Demo Component)
 const styles = theme => ({
@@ -80,12 +82,19 @@ const styles = theme => ({
     DrawerList: {
         width: '250px',
     },
+
+    nestedList: {
+        paddingLeft: theme.spacing.unit * 4,
+    }
 });
 
 class AppNavigationBar extends React.Component {
 
     // Set the inital state of the drawer
-    state = { drawerIsOpen: false }
+    state = { 
+        drawerIsOpen: false,
+        nestedOpen : false,
+    }
 
     // Handle the drawer opening
     handleDrawerOpen = () => {
@@ -94,6 +103,10 @@ class AppNavigationBar extends React.Component {
 
     handleDrawerClose= () => {
         this.setState({ drawerIsOpen: false });
+    }
+
+    handleNestedOpen= () => {
+        this.setState(state => ({nestedOpen : !state.nestedOpen}));
     }
 
     render()
@@ -128,8 +141,24 @@ class AppNavigationBar extends React.Component {
                 <Drawer variant="temporary" open={this.state.drawerIsOpen} onClose={this.handleDrawerClose}>
                     <List className={classes.DrawerList}>
                         <ListItem> ScoreCFB </ListItem>
-                        <ListItem> Scores </ListItem>
-                        <ListItem> Charts </ListItem>
+                        <Divider></Divider>
+                        <ListItem button> 
+                            <ListItemText> Scores </ListItemText> 
+                        </ListItem>
+                        <ListItem button onClick={this.handleNestedOpen}> 
+                            <ListItemText> Charts </ListItemText> 
+                            {this.state.nestedOpen ? <ExpandLess /> : <ExpandMore />}
+                        </ListItem>
+                        <Collapse in={this.state.nestedOpen} timeout='auto' unmountOnExit>
+                            <List component="div" disablePadding>
+                                <ListItem button className={classes.nestedList}>
+                                    <ListItemText> AP Top 25 </ListItemText>
+                                </ListItem>
+                                <ListItem button className={classes.nestedList}>
+                                    <ListItemText> Coaches Poll </ListItemText>
+                                </ListItem>
+                            </List>
+                        </Collapse>
                     </List>
                 </Drawer>
             </div>
