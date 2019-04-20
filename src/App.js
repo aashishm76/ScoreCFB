@@ -20,7 +20,7 @@ class App extends Component {
         {/* <div className="DisplayBoard">
           <DisplayScoresJumbotron></DisplayScoresJumbotron>
         </div> */}
-        <div>
+        <div className="DisplayBoard">
           <Rankings></Rankings>
         </div>
       </div>

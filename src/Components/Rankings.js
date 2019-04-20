@@ -7,13 +7,56 @@ import axios from 'axios';
 
 
 // Material UI Imports
+import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
-import { withStyles } from '@material-ui/core/styles';
-import { InputLabel } from '@material-ui/core';
-import { EROFS } from 'constants';
+import Card from '@material-ui/core/Card';
+import { Table, TableHead, TableRow, TableCell, TableBody, CardHeader } from '@material-ui/core';
+
+// Styling
+const styles = {
+    headerDiv: {
+        display: 'inline-block',
+    },
+    header: {
+        color: 'white',
+        paddingTop: '25px',
+        marginLeft: '15px',
+    },
+    WeekSelectContainer: {
+        display: 'inline-block',
+        float: 'right',
+        marginTop: '50px',
+        marginRight: '15px',
+    },
+    DropDownSelector: {
+        width: '125px',
+        heigh: '180px',
+        backgroundColor: 'white',
+        borderRadius: '2px',
+        textAlign: 'center',
+        marginLeft: '15px',
+    },
+    DropDownRoot: {
+        display: 'flex',
+        flexWrap: 'wrap',
+    },
+    TableContainer: {
+        paddingBottom: '15px',
+    },
+    Card: {
+        maxWidth: '500px'
+    },
+    RakingsTable: {
+        width: 'auto',
+        height: 'auto'
+    },
+    BothTables: {
+        
+    }
+}
 
 
 class Rankings extends Component {
@@ -27,38 +70,50 @@ class Rankings extends Component {
             // Poll Responses from API Call 
             ResponsePolls: [{}],
 
+            // Sorted rankings
+            sortedAPRankings: [{}],
+
+            // Sorted Coaches Poll Rankings
+
             // Array of MenuItems used in Dropdown select box
             DropDownArray: ['1', '2', '3', '4', '5', '6', '8', '9', '10', '11', '12', '13'],
 
             // Header data needed to access API
-            week : "1",
-            year: "2018",
+            Week: '1',
+
         }
     }
 
     getPollData() 
     {
-        // Temporary var data for right now
-        var params = { "year" : "2018", "week" : "1", "seasonType" : 'regular'}
-        var apiURL = "http://api.collegefootballdata.com/rankings?year=${this.state.year}&week=${this.state.week}&seasonType=regular"
-        var proxyUrl = 'https://cors-anywhere.herokuapp.com/'
+        var postBody =  { week: this.state.Week }
+        var apiURL = 'http://68.183.28.230:3000/ranks/getRankingsByWeek'
 
-        // Fetch API Data
-        fetch(`https://api.collegefootballdata.com/rankings?year=${this.state.year}&week=${this.state.week}`, 
-        {
-            method: 'get',
-            headers: {
-                'Content-Type' : 'application/json'
-            }
+        // Axios call
+        axios.post(apiURL, postBody).then(res => {
+
+            // Fetched API data includes data from both AP Top25 and Coaches Poll data
+            // We set the state here to hold onto both data 
+            // Results 1-25 are AP Top25 poll and 26-50 are Coaches Poll
+            this.setState({
+                ResponsePolls: res.data.ranks,
+            })
         })
-        .then((response) => response.json())
-        .then((res) => {
-            console.log(res);
-        })
+
     }
+
+    handleChange = event => {
+
+        this.setState({ Week : event.target.value });
+        console.log("Week:" + this.state.Week);
+
+        this.getPollData();
+    }
+
 
     componentDidMount()
     {
+        // Fetch the data from backend
         this.getPollData();
     }
 
@@ -66,21 +121,77 @@ class Rankings extends Component {
     {
         return (
             <div>
-                <div>
-                    <Typography variant="h2" gutterBottom>[RANKING ORG] [WEEK #] Rankings</Typography>
+                <div className={this.props.classes.headerDiv}>
+                    <Typography className={this.props.classes.header} variant="h2" gutterBottom>Rankings</Typography>
                 </div>
-                <div>
-                    <form>
-                        <FormControl variant="filled">
+                <div className={this.props.classes.WeekSelectContainer}>
+                    <form className={this.props.classes.DropDownRoot}>
+                        <FormControl variant="filled" className={this.props.classes.DropDownSelector}>
                             <Select value={this.state.Week} onChange={this.handleChange}>
-                                {this.state.DropDownArray.map((week, index) =>
-                                    <MenuItem key={index} value={week}>Week {week}</MenuItem> 
+                                {this.state.DropDownArray.map((week, index) => 
+                                    <MenuItem key={index} value={week}> Week {week} </MenuItem>
                                 )}
-                                <MenuItem>Bowls</MenuItem>
-                                <MenuItem>Championship</MenuItem>
+                                <MenuItem></MenuItem>
+                                <MenuItem></MenuItem>
                             </Select>
                         </FormControl>
                     </form>
+                </div>
+                <div className={this.props.classes.BothTables}>
+                    <div className={this.props.classes.TableContainer}>
+                        <Card className={this.props.classes.Card}>
+                            <CardHeader title='AP Top 25' />
+                            <Table className={this.props.classes.RankingsTable}>
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell>Rank</TableCell>
+                                        <TableCell>Team</TableCell>
+                                        <TableCell>Conference</TableCell>
+                                        <TableCell>Points</TableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    { this.state.ResponsePolls.slice(0,24).sort((a,b) => {
+                                        return a.rank - b.rank
+                                    }).map((team, index) =>
+                                        <TableRow key={index}>
+                                            <TableCell>{team.rank}</TableCell>
+                                            <TableCell>{team.school}</TableCell>
+                                            <TableCell>{team.conference}</TableCell>
+                                            <TableCell>{team.points}</TableCell>
+                                        </TableRow>
+                                    )}
+                                </TableBody>
+                            </Table>
+                        </Card>
+                    </div>
+                    <div className={this.props.classes.TableContainer}>
+                        <Card className={this.props.classes.Card}>
+                            <CardHeader title='Coaches Poll' />
+                            <Table className={this.props.classes.RankingsTable}>
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell>Rank</TableCell>
+                                        <TableCell>Team</TableCell>
+                                        <TableCell>Conference</TableCell>
+                                        <TableCell>Points</TableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    { this.state.ResponsePolls.slice(25,50).sort((a,b) => {
+                                        return a.rank - b.rank
+                                    }).map((team, index) =>
+                                        <TableRow key={index}>
+                                            <TableCell>{team.rank}</TableCell>
+                                            <TableCell>{team.school}</TableCell>
+                                            <TableCell>{team.conference}</TableCell>
+                                            <TableCell>{team.points}</TableCell>
+                                        </TableRow>
+                                    )}
+                                </TableBody>
+                            </Table>
+                        </Card>
+                    </div>
                 </div>
             </div>
 
@@ -88,4 +199,4 @@ class Rankings extends Component {
     }
 }
 
-export default (Rankings);
+export default withStyles(styles)(Rankings);
