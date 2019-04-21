@@ -90,7 +90,7 @@ class Rankings extends Component {
     getPollData() 
     {
         var postBody =  { week: this.state.Week }
-        var apiURL = 'https://68.183.28.230:3000/ranks/getRankingsByWeek'
+        var apiURL = 'http://68.183.28.230:3000/ranks/getRankingsByWeek'
 
         // Axios call
         axios.post(apiURL, postBody).then(res => {
