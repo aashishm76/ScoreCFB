@@ -13,7 +13,7 @@ import { InputLabel, Typography, Divider } from '@material-ui/core';
 // CSS in JS Styling
 const styles = {
     DisplayScoresJumbotron: {
-
+        backgroundColor: '#282c34',
     },
     WeekSelectContainer: {
         display: 'inline-block',

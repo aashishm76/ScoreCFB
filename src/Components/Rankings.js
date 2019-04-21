@@ -17,6 +17,9 @@ import { Table, TableHead, TableRow, TableCell, TableBody, CardHeader } from '@m
 
 // Styling
 const styles = {
+    RankingsContainer: {
+        backgroundColor: '#282c34',
+    },
     headerDiv: {
         display: 'inline-block',
     },
@@ -120,9 +123,9 @@ class Rankings extends Component {
     render() 
     {
         return (
-            <div>
+            <div className={this.props.classes.RankingsContainer}>
                 <div className={this.props.classes.headerDiv}>
-                    <Typography className={this.props.classes.header} variant="h2" gutterBottom>Rankings</Typography>
+                    <Typography className={this.props.classes.header} variant="h2" gutterBottom>Rankings Week: {this.state.Week} </Typography>
                 </div>
                 <div className={this.props.classes.WeekSelectContainer}>
                     <form className={this.props.classes.DropDownRoot}>

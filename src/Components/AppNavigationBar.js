@@ -1,6 +1,7 @@
 // React Imports
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 // Material UI Toolkit Imports
 import AppBar from '@material-ui/core/AppBar';
@@ -113,6 +114,7 @@ class AppNavigationBar extends React.Component {
     {
         const { classes } = this.props;
 
+
         return (
             <div className={classes.root}>
                 <AppBar position="static">
@@ -138,14 +140,14 @@ class AppNavigationBar extends React.Component {
                         </div>
                     </Toolbar>
                 </AppBar>
-                <Drawer variant="temporary" open={this.state.drawerIsOpen} onClose={this.handleDrawerClose}>
-                    <List className={classes.DrawerList}>
+                <Drawer  variant="temporary" open={this.state.drawerIsOpen} onClose={this.handleDrawerClose}>
+                    <List className={classes.DrawerList} component='nav'>
                         <ListItem> ScoreCFB </ListItem>
                         <Divider></Divider>
-                        <ListItem button> 
-                            <ListItemText> Scores </ListItemText> 
+                        <ListItem button component={Link} to="/scores"> 
+                            <ListItemText> Scores</ListItemText> 
                         </ListItem>
-                        <ListItem button onClick={this.handleNestedOpen}> 
+                        <ListItem button component={Link} to="/rankings" onClick={this.handleNestedOpen}> 
                             <ListItemText> Charts </ListItemText> 
                             {this.state.nestedOpen ? <ExpandLess /> : <ExpandMore />}
                         </ListItem>
