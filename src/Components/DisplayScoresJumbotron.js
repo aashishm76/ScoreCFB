@@ -76,7 +76,7 @@ class DisplayScoresJumbotron extends Component {
     getScorecards() 
     {
         var postBody= {Week: this.state.Week}
-        var apiURL = "http://68.183.28.230:3000/scores/getScoreboardsByWeek"
+        var apiURL = "https://68.183.28.230:3000/scores/getScoreboardsByWeek"
         axios.post(apiURL, postBody).then(res => {
             // Set the state here 
             this.setState({
