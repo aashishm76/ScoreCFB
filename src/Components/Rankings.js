@@ -47,7 +47,9 @@ const styles = {
         flexWrap: 'wrap',
     },
     TableContainer: {
-        paddingBottom: '15px',
+
+        display: 'inline-block',
+        margin: '15px',
     },
     Card: {
         maxWidth: '500px'
@@ -57,7 +59,7 @@ const styles = {
         height: 'auto'
     },
     BothTables: {
-        
+        textAlign: 'center'
     }
 }
 
@@ -181,7 +183,7 @@ class Rankings extends Component {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    { this.state.ResponsePolls.slice(25,50).sort((a,b) => {
+                                    { this.state.ResponsePolls.slice(25,49).sort((a,b) => {
                                         return a.rank - b.rank
                                     }).map((team, index) =>
                                         <TableRow key={index}>
